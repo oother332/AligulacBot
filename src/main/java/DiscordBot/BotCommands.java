@@ -15,6 +15,10 @@ public class BotCommands {
                 AligulacUtils.getTopTen();
                 BotUtils.sendMessage(event.getChannel(), "Top ten is: ");
             }
+            if(event.getMessage().getContent().equalsIgnoreCase("!thestc")){
+                AligulacUtils.getPlayerByName("thestc");
+                BotUtils.sendMessage(event.getChannel(), "Top ten is: ");
+            }
         }
     }
 }
