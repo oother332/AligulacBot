@@ -1,5 +1,6 @@
 package DiscordBot;
 
+import Aligulac.AligulacUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
@@ -8,10 +9,11 @@ public class BotCommands {
 
 
     @EventSubscriber
-    public void onMessageRecieved(MessageReceivedEvent event){
+    public void onMessageRecieved(MessageReceivedEvent event) throws Exception{
         if(event.getMessage().getContent().startsWith(prefix)){
-            if(event.getMessage().getContent().equalsIgnoreCase("!test")){
-                BotUtils.sendMessage(event.getChannel(), "Test Message");
+            if(event.getMessage().getContent().equalsIgnoreCase("!topten")){
+                AligulacUtils.getTopTen();
+                BotUtils.sendMessage(event.getChannel(), "Top ten is: ");
             }
         }
     }
