@@ -1,13 +1,13 @@
 package Aligulac;
 
-import com.fasterxml.jackson.core.JsonParser;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class AligulacUtils {
 
@@ -33,6 +33,20 @@ public class AligulacUtils {
 
     public static void getPlayerByName(String name) throws Exception{
         int id = getId(name);
+        String inputLine;
+        String queryURL = rootURL + "player/" + id + "/?format=json&apikey=" + apikey;
+        StringBuffer response = new StringBuffer();
+
+        URL url = new URL(queryURL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        while((inputLine = in.readLine())!= null){
+            response.append(inputLine);
+        }
+        in.close();
+        System.out.println(response);
     }
 
     public static int getId(String name) throws Exception{
@@ -49,12 +63,21 @@ public class AligulacUtils {
             response.append(inputLine);
         }
         in.close();
+        Gson gson = new Gson();
 
-        int id = response.charAt(response.indexOf("id") + 5);
+        AligulacPojo result = gson.fromJson(response.toString(), AligulacPojo.class);
 
-        System.out.println(id);
+        ArrayList<Players> players = new ArrayList<>();
+        for(Players p : result.getPlayers()){
+            players.add(p);
+        }
 
-        return id;
+        if(players.size() > 1){
+            return -1;
+            //handle multiple results
+        }
+        else
+            return Integer.parseInt(players.get(0).getId());
     }
 
 
