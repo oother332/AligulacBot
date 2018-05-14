@@ -1,5 +1,8 @@
 package Aligulac;
 
+import Aligulac.PlayerById.PlayerStats;
+import Aligulac.PlayerByName.NameSearchResult;
+import Aligulac.PlayerByName.Players;
 import com.google.gson.Gson;
 
 
@@ -14,9 +17,9 @@ public class AligulacUtils {
     static String apikey = "19SpUSIbhyU4RqHWtTIM";
     static String rootURL = "http://aligulac.com/api/v1/";
 
-    public static void getTopTen() throws Exception{
+    public static PlayerStats[] getTopTen() throws Exception{
         String inputLine;
-        String queryURL = rootURL + "activerating/?period=100&format=json&order_by=-rating&limit=10&apikey=" + apikey;
+        String queryURL = rootURL + "player/?current_rating__isnull=false&current_rating__decay__lt=4&order_by=-current_rating__rating&limit=10&format=json&apikey=" + apikey;
         StringBuffer response = new StringBuffer();
 
         URL url = new URL(queryURL);
@@ -28,10 +31,16 @@ public class AligulacUtils {
             response.append(inputLine);
         }
         in.close();
+        Gson gson = new Gson();
+        PlayerStats[] topTen = gson.fromJson(response.toString(), PlayerStats[].class);
         System.out.println(response);
+        for(PlayerStats stat : topTen){
+            System.out.println(stat.getRomanized_name());
+        }
+        return new PlayerStats[] {};
     }
 
-    public static void getPlayerByName(String name) throws Exception{
+    public static PlayerStats getPlayerByName(String name) throws Exception{
         int id = getId(name);
         String inputLine;
         String queryURL = rootURL + "player/" + id + "/?format=json&apikey=" + apikey;
@@ -46,7 +55,13 @@ public class AligulacUtils {
             response.append(inputLine);
         }
         in.close();
-        System.out.println(response);
+
+        Gson gson = new Gson();
+
+        PlayerStats stats = gson.fromJson(response.toString(), PlayerStats.class);
+
+        System.out.println(stats.getName());
+        return stats;
     }
 
     public static int getId(String name) throws Exception{
@@ -65,7 +80,7 @@ public class AligulacUtils {
         in.close();
         Gson gson = new Gson();
 
-        AligulacPojo result = gson.fromJson(response.toString(), AligulacPojo.class);
+        NameSearchResult result = gson.fromJson(response.toString(), NameSearchResult.class);
 
         ArrayList<Players> players = new ArrayList<>();
         for(Players p : result.getPlayers()){

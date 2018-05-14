@@ -1,5 +1,6 @@
 package DiscordBot;
 
+import Aligulac.PlayerById.PlayerStats;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.IChannel;
@@ -22,6 +23,21 @@ public class BotUtils {
                 e.printStackTrace();
             }
         });
+    }
+
+    public static String compileMessage(PlayerStats stats, MessageType type){
+        StringBuilder message = new StringBuilder();
+
+        switch (type){
+            case ONEPLAYER:
+                message.append("Here are some stats for your query:\n").append("\nPlayer name: ").append(stats.getRomanized_name()).append("\nRanking: ").append(stats.getCurrent_rating().getRating());
+                message.append("\nNationality: ").append(stats.getCountry());
+            case TOPTEN:
+
+        }
+
+
+        return message.toString();
     }
 
 }

@@ -1,4 +1,4 @@
-package Aligulac;
+package Aligulac.PlayerByName;
 
 
 public class Events

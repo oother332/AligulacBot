@@ -1,7 +1,7 @@
-package Aligulac;
+package Aligulac.PlayerByName;
 
 
-public class AligulacPojo
+public class NameSearchResult
 {
     private String[] teams;
 
