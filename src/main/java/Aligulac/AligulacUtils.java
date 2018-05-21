@@ -32,11 +32,10 @@ public class AligulacUtils {
         }
         in.close();
         Gson gson = new Gson();
-        PlayerStats[] topTen = gson.fromJson(response.toString(), PlayerStats[].class);
+        PlayerStats topTen = gson.fromJson(response.toString(), PlayerStats.class);
         System.out.println(response);
-        for(PlayerStats stat : topTen){
-            System.out.println(stat.getRomanized_name());
-        }
+        System.out.println(topTen.getRomanized_name());
+
         return new PlayerStats[] {};
     }
 

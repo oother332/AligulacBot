@@ -5,22 +5,41 @@ import Aligulac.PlayerById.PlayerStats;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BotCommands {
     static String prefix = "!";
 
 
     @EventSubscriber
     public void onMessageRecieved(MessageReceivedEvent event) throws Exception{
-        if(event.getMessage().getContent().startsWith(prefix)){
-            if(event.getMessage().getContent().equalsIgnoreCase("!topten")){
+        String[] argArray = event.getMessage().getContent().split(" ");
+        if(!argArray[0].startsWith(prefix))
+            return;
+
+        String command = argArray[0].substring(1);
+
+        switch(command){
+
+            case "topten":
                 PlayerStats[] topten = AligulacUtils.getTopTen();
                 BotUtils.sendMessage(event.getChannel(), "Top ten is: ");
-            }
-            if(event.getMessage().getContent().equalsIgnoreCase("!thestc")){
-                PlayerStats stats = AligulacUtils.getPlayerByName("thestc");
-                String message = BotUtils.compileMessage(stats, MessageType.ONEPLAYER);
-                BotUtils.sendMessage(event.getChannel(), message);
-            }
+                break;
+            case "player":
+                List<PlayerStats> playerStats = new ArrayList<PlayerStats>();
+                playerStats.add(AligulacUtils.getPlayerByName(argArray[1]));
+                String singleMessage = BotUtils.compileMessage(playerStats, MessageType.ONEPLAYER);
+                BotUtils.sendMessage(event.getChannel(), singleMessage);
+                break;
+            case "players":
+                List<PlayerStats> playersStats = new ArrayList<PlayerStats>();
+                for(int i = 1; i < argArray.length; i++){
+                    playersStats.add(AligulacUtils.getPlayerByName(argArray[i]));
+                }
+                String multiMessage = BotUtils.compileMessage(playersStats, MessageType.MULTIPLAYERS);
+                BotUtils.sendMessage(event.getChannel(), multiMessage);
+                break;
         }
     }
 }

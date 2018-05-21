@@ -7,6 +7,8 @@ import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.RequestBuffer;
 
+import java.util.List;
+
 public class BotUtils {
 
     public static IDiscordClient buildDiscordClient(String token) {
@@ -25,15 +27,20 @@ public class BotUtils {
         });
     }
 
-    public static String compileMessage(PlayerStats stats, MessageType type){
+    public static String compileMessage(List<PlayerStats> stats, MessageType type){
         StringBuilder message = new StringBuilder();
 
         switch (type){
             case ONEPLAYER:
-                message.append("Here are some stats for your query:\n").append("\nPlayer name: ").append(stats.getRomanized_name()).append("\nRanking: ").append(stats.getCurrent_rating().getRating());
-                message.append("\nNationality: ").append(stats.getCountry());
+                message.append("Here are some stats for your query:\n").append("\nPlayer name: ").append(stats.get(0).getRomanized_name()).append("\nRanking: ").append(stats.get(0).getCurrent_rating().getRating());
+                message.append("\nNationality: ").append(stats.get(0).getCountry());
+                break;
+            case MULTIPLAYERS:
+                message.append("DANK MEMES");
+                break;
             case TOPTEN:
-
+                message.append("swag");
+                break;
         }
 
 
