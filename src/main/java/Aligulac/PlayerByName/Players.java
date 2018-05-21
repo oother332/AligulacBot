@@ -5,7 +5,7 @@ public class Players
 {
     private String id;
 
-    private String[] teams;
+    private String[][] teams;
 
     private String tag;
 
@@ -25,12 +25,12 @@ public class Players
         this.id = id;
     }
 
-    public String[] getTeams ()
+    public String[][] getTeams ()
     {
         return teams;
     }
 
-    public void setTeams (String[] teams)
+    public void setTeams (String[][] teams)
     {
         this.teams = teams;
     }

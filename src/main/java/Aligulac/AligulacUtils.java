@@ -4,6 +4,7 @@ import Aligulac.PlayerById.PlayerStats;
 import Aligulac.PlayerByName.NameSearchResult;
 import Aligulac.PlayerByName.Players;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 import java.io.BufferedReader;
@@ -11,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AligulacUtils {
 
@@ -55,11 +57,11 @@ public class AligulacUtils {
         }
         in.close();
 
+
         Gson gson = new Gson();
 
         PlayerStats stats = gson.fromJson(response.toString(), PlayerStats.class);
 
-        System.out.println(stats.getName());
         return stats;
     }
 
@@ -79,6 +81,8 @@ public class AligulacUtils {
         in.close();
         Gson gson = new Gson();
 
+        System.out.println(response);
+
         NameSearchResult result = gson.fromJson(response.toString(), NameSearchResult.class);
 
         ArrayList<Players> players = new ArrayList<>();
@@ -87,11 +91,15 @@ public class AligulacUtils {
         }
 
         if(players.size() > 1){
-            return -1;
+            return Integer.parseInt((players.get(0).getId()));
             //handle multiple results
         }
         else
             return Integer.parseInt(players.get(0).getId());
+    }
+
+    public static PlayerStats handleMoreThanOneResult(List<PlayerStats> stats){
+        return stats.get(0);
     }
 
 

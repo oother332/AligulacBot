@@ -36,7 +36,11 @@ public class BotUtils {
                 message.append("\nNationality: ").append(stats.get(0).getCountry());
                 break;
             case MULTIPLAYERS:
-                message.append("DANK MEMES");
+                message.append("Here are some stats for your query:\n");
+                for(int i = 0; i < stats.size(); i++){
+                    message.append("\nPlayer name: ").append(stats.get(i).getRomanized_name()).append("\nRanking: ").append(stats.get(i).getCurrent_rating().getRating());
+                    message.append("\nNationality: ").append(stats.get(i).getCountry());
+                }
                 break;
             case TOPTEN:
                 message.append("swag");
