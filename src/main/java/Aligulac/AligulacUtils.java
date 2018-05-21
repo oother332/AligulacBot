@@ -98,9 +98,4 @@ public class AligulacUtils {
             return Integer.parseInt(players.get(0).getId());
     }
 
-    public static PlayerStats handleMoreThanOneResult(List<PlayerStats> stats){
-        return stats.get(0);
-    }
-
-
 }
