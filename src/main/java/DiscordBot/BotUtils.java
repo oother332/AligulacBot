@@ -38,7 +38,7 @@ public class BotUtils {
             case MULTIPLAYERS:
                 message.append("Here are some stats for your query:\n");
                 for(int i = 0; i < stats.size(); i++){
-                    message.append("\nRomanized name: ").append("\nPlayer name: ").append(stats.get(0).getName()).append(stats.get(i).getRomanized_name()).append("\nRanking: ").append(stats.get(i).getCurrent_rating().getRating());
+                    message.append("\nRomanized name: ").append(stats.get(i).getRomanized_name()).append("\nPlayer name: ").append(stats.get(i).getName()).append("\nRanking: ").append(stats.get(i).getCurrent_rating().getRating());
                     message.append("\nNationality: ").append(stats.get(i).getCountry());
                 }
                 break;
