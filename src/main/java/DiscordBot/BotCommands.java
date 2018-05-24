@@ -40,6 +40,9 @@ public class BotCommands {
                 String multiMessage = BotUtils.compileMessage(playersStats, MessageType.MULTIPLAYERS);
                 BotUtils.sendMessage(event.getChannel(), multiMessage);
                 break;
+            case "h2h":
+                AligulacUtils.predictMatch(argArray[1], argArray[2], argArray[3]);
+
         }
     }
 }

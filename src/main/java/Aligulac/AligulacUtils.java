@@ -1,5 +1,7 @@
 package Aligulac;
 
+import Aligulac.MatchPrediction.Outcomes;
+import Aligulac.MatchPrediction.PredictMatch;
 import Aligulac.PlayerById.PlayerStats;
 import Aligulac.PlayerByName.NameSearchResult;
 import Aligulac.PlayerByName.Players;
@@ -96,6 +98,33 @@ public class AligulacUtils {
         }
         else
             return Integer.parseInt(players.get(0).getId());
+    }
+
+    public static void predictMatch(String player1, String player2, String numMatches) throws Exception {
+        int id1 = getId(player1);
+        int id2 = getId(player2);
+
+        String inputLine;
+        String queryURL = rootURL + "predictmatch/" + id1 + "," + id2 + "/?bo=" + numMatches + "&format=json&apikey=" + apikey;
+        StringBuffer response = new StringBuffer();
+
+        URL url = new URL(queryURL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+        while((inputLine = in.readLine())!= null){
+            response.append(inputLine);
+        }
+        in.close();
+
+        Gson gson = new Gson();
+
+        PredictMatch prediction = gson.fromJson(response.toString(), PredictMatch.class);
+
+        for(Outcomes outcome : prediction.getOutcomes()){
+            System.out.println(outcome.getProb());
+        }
     }
 
 }
