@@ -19,7 +19,7 @@ import java.util.List;
 public class AligulacUtils {
 
     static String apikey = "19SpUSIbhyU4RqHWtTIM";
-    static String rootURL = "http://aligulac.com/api/v1/";
+        static String rootURL = "http://aligulac.com/api/v1/";
 
     public static PlayerStats[] getTopTen() throws Exception{
         String inputLine;
@@ -35,10 +35,12 @@ public class AligulacUtils {
             response.append(inputLine);
         }
         in.close();
+        int important = response.indexOf("objects");
+        System.out.println(important);
         Gson gson = new Gson();
-        PlayerStats topTen = gson.fromJson(response.toString(), PlayerStats.class);
+        PlayerStats[] topTen = gson.fromJson(response.substring(important + 6).toString(), PlayerStats[].class);
         System.out.println(response);
-        System.out.println(topTen.getRomanized_name());
+
 
         return new PlayerStats[] {};
     }
