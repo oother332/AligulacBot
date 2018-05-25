@@ -1,6 +1,7 @@
 package Aligulac;
 
 import Aligulac.MatchPrediction.Outcomes;
+import Aligulac.MatchPrediction.Pla;
 import Aligulac.MatchPrediction.PredictMatch;
 import Aligulac.PlayerById.PlayerStats;
 import Aligulac.PlayerByName.NameSearchResult;
@@ -36,9 +37,9 @@ public class AligulacUtils {
         }
         in.close();
         int important = response.indexOf("objects");
-        System.out.println(important);
+        System.out.println(response.substring(important+10, response.length()-1));
         Gson gson = new Gson();
-        PlayerStats[] topTen = gson.fromJson(response.substring(important + 6).toString(), PlayerStats[].class);
+        PlayerStats topTen = gson.fromJson(response.substring(important + 10).toString(), new TypeToken<List<PlayerStats>>() {}.getType());
         System.out.println(response);
 
 
