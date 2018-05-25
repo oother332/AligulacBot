@@ -1,6 +1,7 @@
 package DiscordBot;
 
 import Aligulac.AligulacUtils;
+import Aligulac.MatchPrediction.PredictMatch;
 import Aligulac.PlayerById.PlayerStats;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -41,7 +42,10 @@ public class BotCommands {
                 BotUtils.sendMessage(event.getChannel(), multiMessage);
                 break;
             case "h2h":
-                AligulacUtils.predictMatch(argArray[1], argArray[2], argArray[3]);
+                PredictMatch prediction = AligulacUtils.predictMatch(argArray[1], argArray[2], argArray[3]);
+                String message = BotUtils.compileMessage(prediction, argArray[3]);
+                BotUtils.sendMessage((event.getChannel()), message);
+                break;
 
         }
     }

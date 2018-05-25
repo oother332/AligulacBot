@@ -1,5 +1,5 @@
 package DiscordBot;
 
 public enum MessageType {
-    TOPTEN, ONEPLAYER, MULTIPLAYERS
+    TOPTEN, ONEPLAYER, MULTIPLAYERS, HEAD2HEAD
 }

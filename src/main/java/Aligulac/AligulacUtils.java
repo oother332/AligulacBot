@@ -100,7 +100,7 @@ public class AligulacUtils {
             return Integer.parseInt(players.get(0).getId());
     }
 
-    public static void predictMatch(String player1, String player2, String numMatches) throws Exception {
+    public static PredictMatch predictMatch(String player1, String player2, String numMatches) throws Exception {
         int id1 = getId(player1);
         int id2 = getId(player2);
 
@@ -125,6 +125,7 @@ public class AligulacUtils {
         for(Outcomes outcome : prediction.getOutcomes()){
             System.out.println(outcome.getProb());
         }
+        return prediction;
     }
 
 }

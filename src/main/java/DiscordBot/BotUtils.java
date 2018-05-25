@@ -1,5 +1,7 @@
 package DiscordBot;
 
+import Aligulac.MatchPrediction.Outcomes;
+import Aligulac.MatchPrediction.PredictMatch;
 import Aligulac.PlayerById.PlayerStats;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
@@ -7,6 +9,7 @@ import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.RequestBuffer;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class BotUtils {
@@ -48,6 +51,24 @@ public class BotUtils {
         }
 
 
+        return message.toString();
+    }
+
+    public static String compileMessage(PredictMatch prediction, String numGames){
+        StringBuilder message = new StringBuilder();
+        int i = 1;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        message.append("In a best of " + numGames + " between " + prediction.getPla().getTag() + " and " + prediction.getPlb().getTag());
+        message.append(" the results are as follows:\n");
+
+        for(Outcomes outcomes : prediction.getOutcomes()){
+            if(i <= 4)
+                message.append("\n" + df.format((Double.parseDouble(outcomes.getProb()) * 100)) + "% chance for " + outcomes.getSca() + " - " + outcomes.getScb() + " in favour of " + prediction.getPla().getTag());
+            else
+                message.append("\n" + df.format((Double.parseDouble(outcomes.getProb()) * 100)) + "% chance for " + outcomes.getScb() + " - " + outcomes.getSca() + " in favour of " + prediction.getPlb().getTag());
+            i++;
+        }
         return message.toString();
     }
 
