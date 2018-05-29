@@ -3,6 +3,7 @@ package Aligulac;
 import Aligulac.MatchPrediction.Outcomes;
 import Aligulac.MatchPrediction.Pla;
 import Aligulac.MatchPrediction.PredictMatch;
+import Aligulac.PlayerById.Form;
 import Aligulac.PlayerById.PlayerStats;
 import Aligulac.PlayerByName.NameSearchResult;
 import Aligulac.PlayerByName.Players;
@@ -22,29 +23,6 @@ public class AligulacUtils {
     static String apikey = "19SpUSIbhyU4RqHWtTIM";
         static String rootURL = "http://aligulac.com/api/v1/";
 
-    public static PlayerStats[] getTopTen() throws Exception{
-        String inputLine;
-        String queryURL = rootURL + "player/?current_rating__isnull=false&current_rating__decay__lt=4&order_by=-current_rating__rating&limit=10&format=json&apikey=" + apikey;
-        StringBuffer response = new StringBuffer();
-
-        URL url = new URL(queryURL);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-        while((inputLine = in.readLine())!= null){
-            response.append(inputLine);
-        }
-        in.close();
-        int important = response.indexOf("objects");
-        System.out.println(response.substring(important+10, response.length()-1));
-        Gson gson = new Gson();
-        PlayerStats topTen = gson.fromJson(response.substring(important + 10).toString(), new TypeToken<List<PlayerStats>>() {}.getType());
-        System.out.println(response);
-
-
-        return new PlayerStats[] {};
-    }
 
     public static PlayerStats getPlayerByName(String name) throws Exception{
         int id = getId(name);

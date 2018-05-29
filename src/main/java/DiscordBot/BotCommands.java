@@ -23,10 +23,6 @@ public class BotCommands {
 
         switch(command){
 
-            case "topten":
-                PlayerStats[] topten = AligulacUtils.getTopTen();
-                BotUtils.sendMessage(event.getChannel(), "Top ten is: ");
-                break;
             case "player":
                 List<PlayerStats> playerStats = new ArrayList<PlayerStats>();
                 playerStats.add(AligulacUtils.getPlayerByName(argArray[1]));
@@ -42,6 +38,9 @@ public class BotCommands {
                 BotUtils.sendMessage(event.getChannel(), multiMessage);
                 break;
             case "h2h":
+                if((Integer.parseInt(argArray[3]) % 2) == 0){
+                    throw new Exception();
+                }
                 PredictMatch prediction = AligulacUtils.predictMatch(argArray[1], argArray[2], argArray[3]);
                 String message = BotUtils.compileMessage(prediction, argArray[3]);
                 BotUtils.sendMessage((event.getChannel()), message);

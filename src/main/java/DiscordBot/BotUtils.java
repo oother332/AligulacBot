@@ -35,19 +35,23 @@ public class BotUtils {
 
         switch (type){
             case ONEPLAYER:
-                message.append("Here are some stats for your query:\n").append("\nPlayer name: ").append(stats.get(0).getName()).append("\nRomanized name: ").append(stats.get(0).getRomanized_name()).append("\nRanking: ").append(stats.get(0).getCurrent_rating().getRating());
-                message.append("\nNationality: ").append(stats.get(0).getCountry());
+                message.append("Here are some stats for your query:\n\n")
+                        .append("\nRomanized name: ").append(stats.get(0).getRomanized_name())
+                        .append("\nPlayer name: ").append(stats.get(0).getName())
+                        .append("\nRanking: ").append((Double.parseDouble(stats.get(0).getCurrent_rating().getRating())* 1000) + 1000)
+                        .append("\nNationality: ").append(stats.get(0).getCountry());
                 break;
             case MULTIPLAYERS:
-                message.append("Here are some stats for your query:\n");
+                message.append("Here are some stats for your query:\n\n");
                 for(int i = 0; i < stats.size(); i++){
-                    message.append("\nRomanized name: ").append(stats.get(i).getRomanized_name()).append("\nPlayer name: ").append(stats.get(i).getName()).append("\nRanking: ").append(stats.get(i).getCurrent_rating().getRating());
-                    message.append("\nNationality: ").append(stats.get(i).getCountry());
+                    message.append("\n\nRomanized name: ").append(stats.get(i).getRomanized_name())
+                            .append("\nPlayer name: ").append(stats.get(i).getName())
+                            .append("\nRanking: ").append((Double.parseDouble(stats.get(i).getCurrent_rating().getRating())* 1000) + 1000)
+                            .append("\nNationality: ").append(stats.get(i).getCountry());
                 }
                 break;
-            case TOPTEN:
-                message.append("swag");
-                break;
+            default:
+                message.append("Sorry, an error occurred!");
         }
 
 
