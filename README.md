@@ -1,7 +1,7 @@
 This is a personal project using the Discord4J library and the aligulac.com API to make a bot which responds to some simple queries.
 
 
-##Commands
+## Commands
 
 !player [player_name]
 -use this to query some information about a single player
