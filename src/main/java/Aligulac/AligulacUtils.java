@@ -21,7 +21,7 @@ import java.util.List;
 public class AligulacUtils {
 
     static String apikey = "19SpUSIbhyU4RqHWtTIM";
-        static String rootURL = "http://aligulac.com/api/v1/";
+    static String rootURL = "http://aligulac.com/api/v1/";
 
 
     public static PlayerStats getPlayerByName(String name) throws Exception{
