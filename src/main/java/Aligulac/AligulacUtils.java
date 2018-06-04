@@ -64,8 +64,6 @@ public class AligulacUtils {
         in.close();
         Gson gson = new Gson();
 
-        System.out.println(response);
-
         NameSearchResult result = gson.fromJson(response.toString(), NameSearchResult.class);
 
         ArrayList<Players> players = new ArrayList<>();
@@ -103,9 +101,6 @@ public class AligulacUtils {
 
         PredictMatch prediction = gson.fromJson(response.toString(), PredictMatch.class);
 
-        for(Outcomes outcome : prediction.getOutcomes()){
-            System.out.println(outcome.getProb());
-        }
         return prediction;
     }
 

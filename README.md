@@ -2,11 +2,20 @@ This is a personal project using the Discord4J library and the aligulac.com API 
 
 ## Installation
 
-Make sure Discord is installed on your computer
+1. Make sure Discord is installed on your computer
 
-Clone the Repo
+2. Clone the Repo
 
-Import to your favourite IDE
+3. Import to your favourite IDE as a Maven Project 
+
+4. Follow this guide: https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token to create a bot for yourself
+    
+    a. Use your bot token as argument for the program.
+    b. Add the bot to your desired server using the ClientID
+ 
+5. Use the bot!
+
+
 
 
 

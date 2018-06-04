@@ -2,3 +2,6 @@
 AligulacBot.iml
 discordBot.iml
 target/
+.classpath
+.project
+.settings/
